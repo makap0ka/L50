@@ -96,6 +96,50 @@ public:
         cout << "Translation added" << endl;
     }
 
+    void RemoveWord() 
+    { 
+        string word;
+
+        cout << "Enter word: "; 
+        cin >> word; 
+        
+        auto it = dic.find(word); 
+        
+        if (it == dic.end()) 
+        { 
+            cout << "Word not found" << endl;
+            return; 
+        } 
+        
+        dic.erase(it); 
+        
+        cout << "Word removed" << endl; 
+    } 
+
+    void ShowAll() 
+    { 
+        if (dic.empty()) 
+        { 
+            cout << "Dictionary is empty" << endl; 
+            return; 
+        } 
+        
+        cout << "\n----- Dictionary -----" << endl; 
+        
+        for (auto word : dic) 
+        { 
+            cout << word.first << " : "; 
+            for (string translate : word.second) 
+            { 
+                cout << translate << " "; 
+            } 
+        
+            cout << endl; 
+        } 
+
+        cout << "----------------------" << endl; 
+    }
+
     void SaveToFile()
     {
         ofstream file("dictionary.txt");
@@ -169,6 +213,8 @@ int main()
         cout << "1. Add word with translations" << endl;
         cout << "2. Find translations" << endl;
         cout << "3. Add translation" << endl;
+        cout << "4. Remove word" << endl; 
+        cout << "5. Show all words" << endl;
         cout << "6. Save dictionary to file" << endl;
         cout << "7. Load dictionary from file" << endl;
         cout << "0. Exit" << endl;
@@ -187,6 +233,14 @@ int main()
 
         case 3:
             dictionary.AddTranslate();
+            break;
+
+        case 4: 
+            dictionary.RemoveWord(); 
+            break; 
+        
+        case 5: 
+            dictionary.ShowAll(); 
             break;
 
         case 6:
